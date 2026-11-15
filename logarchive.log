@@ -1,0 +1,21 @@
+[2026-11-15 13:34:48] Run started (age>7d, dry=0, compress=0)
+[2026-11-15 13:34:48] [ARCHIVED] big_old.log -> Archive/log/
+[2026-11-15 13:34:48] [KEPT] diff_subtle.log : backup content differs
+[2026-11-15 13:34:48] [KEPT] hard.log : backup has SAME inode (hard link)
+[2026-11-15 13:34:48] [KEPT] nobackup.log : backup missing
+[2026-11-15 13:34:48] [ARCHIVED] prebacked.log -> Archive/log/
+[2026-11-15 13:34:48] [ARCHIVED] app2.log -> Archive/log/
+[2026-11-15 13:34:48] [ARCHIVED] empty_old.log -> Archive/log/
+[2026-11-15 13:34:48] [ARCHIVED] app1.log -> Archive/log/
+[2026-11-15 13:34:48] [ARCHIVED] app3.log -> Archive/log/
+[2026-11-15 13:34:48] [KEPT] diff.log : backup content differs
+[2026-11-15 13:34:48] [ARCHIVED] my server.log -> Archive/log/
+[2026-11-15 13:34:48] [COLLISION] collide.log already in Archive/log -> saved as collide.log.20261115133448.dup
+[2026-11-15 13:34:48] [ARCHIVED] collide.log -> Archive/log/
+[2026-11-15 13:34:48] [ARCHIVED] .hidden.log -> Archive/log/
+[2026-11-15 13:34:48] [ARCHIVED] notes1.txt -> Archive/txt/
+[2026-11-15 13:34:48] [KEPT] hard2.txt : backup has SAME inode (hard link)
+[2026-11-15 13:34:48] [KEPT] diff2.txt : backup content differs
+[2026-11-15 13:34:48] [KEPT] nobackup2.txt : backup missing
+[2026-11-15 13:34:48] [ARCHIVED] notes2.txt -> Archive/txt/
+[2026-11-15 13:34:48] ---- Done: 11 archived, 7 kept ----
