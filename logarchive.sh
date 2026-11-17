@@ -1,9 +1,3 @@
-#!/bin/bash
-# =====================================================================
-# Automated Log Archival + Safe-Delete System (extended version)
-# Usage: ./logarchive.sh [-n] [-c] [-h] [config_file]
-#   -n  dry run (no changes)     -c  gzip archived files     -h  help
-# =====================================================================
 
 archived=0; kept=0; skipped=0; collisions=0
 declare -A cat_count          # archived files per category
@@ -16,14 +10,12 @@ usage() {
     exit 0
 }
 
-# ---------- logging ----------
 log() {
     local msg="[$(date '+%F %T')] $*"
     echo "$msg"
     [ -n "$LOG_FILE" ] && [ "$DRY_RUN" != 1 ] && echo "$msg" >> "$LOG_FILE"
 }
 
-# ---------- argument parsing ----------
 CLI_DRY=""; CLI_COMP=""
 while getopts "nch" opt; do
     case $opt in
@@ -42,7 +34,6 @@ source "$CONFIG"
 [ -n "$CLI_COMP" ] && COMPRESS=1
 DRY_RUN="${DRY_RUN:-0}"; COMPRESS="${COMPRESS:-0}"
 
-# ---------- validation ----------
 validate_config() {
     local v
     for v in ACTIVE_DIR ARCHIVE_DIR BACKUP_DIR AGE_DAYS PATTERNS; do
@@ -52,7 +43,6 @@ validate_config() {
     [ -d "$ACTIVE_DIR" ] || { echo "Active directory missing: $ACTIVE_DIR"; exit 1; }
 }
 
-# ---------- lock (prevents two runs at once) ----------
 acquire_lock() {
     if [ -e "$LOCKFILE" ] && kill -0 "$(cat "$LOCKFILE" 2>/dev/null)" 2>/dev/null; then
         echo "Another instance is running (PID $(cat "$LOCKFILE"))"; exit 1
@@ -76,7 +66,6 @@ human() {   # bytes -> human readable
     else echo "$b B"; fi
 }
 
-# Returns 0 = safe; 1 = no backup; 2 = same inode; 3 = content differs
 backup_ok() {
     local orig="$1" bak="$2"
     [ -f "$bak" ] || return 1
@@ -85,7 +74,6 @@ backup_ok() {
     return 0
 }
 
-# ---------- helpers for archive step ----------
 unique_dest() {   # sets global DEST; if name exists in archive, append timestamp
     local dir="$1" name="$2"
     DEST="$dir/$name"
@@ -149,7 +137,7 @@ process_file() {
     esac
 }
 
-report_ignored() {   # files in Active that did not match any rule
+report_ignored() {   
     local f
     while IFS= read -r -d '' f; do
         skipped=$((skipped + 1))
